@@ -1,5 +1,7 @@
 package swing;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -8,7 +10,7 @@ import javax.swing.JTextField;
 
 public class GuiAreaDeTexto extends JPanel {
 
-    private final static String NOVALINHA = "\n";
+    private final String NOVALINHA = "\n";
     
     private JTextField tfCampo;
     private JButton btLimpar;
@@ -31,7 +33,7 @@ public class GuiAreaDeTexto extends JPanel {
         btLimpar.setBounds(25, 170, 150, 25);
         add(btLimpar);
         
-        taTexto = new JTextArea(5, 20);
+        taTexto = new JTextArea();
         taTexto.setEditable(false);
         
         spTexto = new JScrollPane(taTexto);
@@ -39,6 +41,24 @@ public class GuiAreaDeTexto extends JPanel {
         add(spTexto);
     }
 
-    private void definirEventos() {}
+    private void definirEventos() {
+        btLimpar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tfCampo.setText("");
+                taTexto.setText("");
+                tfCampo.requestFocus();
+            }
+        });
+        tfCampo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tfCampo.selectAll();
+                taTexto.append(tfCampo.getText() + NOVALINHA);
+                tfCampo.setText("");
+                tfCampo.requestFocus();
+            }
+        });
+    }
     
 }
