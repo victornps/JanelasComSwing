@@ -36,7 +36,9 @@ public class GuiLista extends JPanel {
         
         tfValorDesconto = new JTextField();
         tfValorDesconto.setBounds(35, 150, 100, 25);
+        tfValorDesconto.setEnabled(false);
         add(tfValorDesconto);
+        
         
         btCalcular = new JButton("Calcular");
         btCalcular.setBounds(35, 120, 90, 25);
@@ -49,22 +51,35 @@ public class GuiLista extends JPanel {
         spLista = new JScrollPane(liDesconto);
         spLista.setBounds(35, 60, 100, 55);
         add(spLista);
+        
+        //tfValor.requestFocus();
     }
 
     private void definirEventos() {
         btCalcular.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                float valor = 0;
                 float valorDesconto = 0;
-                float valor = Float.parseFloat(tfValor.getText());
-                if (liDesconto.getSelectedIndex() == 0) {
-                    valorDesconto = valor * 0.9f;
-                } else if (liDesconto.getSelectedIndex() == 1) {
-                    valorDesconto = valor * 0.8f;
-                } else if (liDesconto.getSelectedIndex() == 2) {
-                    valorDesconto = valor * 0.7f;
-                }
-                tfValorDesconto.setText(String.valueOf(valorDesconto));
+                try {
+                    valor = Float.parseFloat(tfValor.getText());
+                } catch(NumberFormatException error) {
+                    JOptionPane.showMessageDialog(null, "Informe um número válido!");
+                } finally {
+                    switch (liDesconto.getSelectedIndex()) {
+                        case 0:
+                            valorDesconto = valor * 0.9f;
+                            break;
+                        case 1:
+                            valorDesconto = valor * 0.8f;
+                            break;
+                        case 2:
+                            valorDesconto = valor * 0.7f;
+                            break;
+                    }
+                    tfValorDesconto.setText(String.valueOf(valorDesconto));
+                    tfValor.requestFocus();
+                }   
             }
         });
     }

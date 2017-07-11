@@ -17,7 +17,8 @@ public class GuiMenuPrincipal extends JFrame {
     private JMenuBar mnBarra;
     private JMenu mnArquivo, mnExemplos;
     private JMenuItem miSair, miBotao, miCaixaOpcao, miRadio;
-    private JMenuItem miLabel, miLista;
+    private JMenuItem miLabel, miLista, miListaComFotos, miCombo;
+    private JMenuItem miAreaDeTexto;
     
     public GuiMenuPrincipal() {
         inicializarComponentes();
@@ -42,6 +43,9 @@ public class GuiMenuPrincipal extends JFrame {
         miRadio = new JMenuItem("Radio");
         miLabel = new JMenuItem("Label");
         miLista = new JMenuItem("Lista");
+        miListaComFotos = new JMenuItem("Lista com Fotos");
+        miCombo = new JMenuItem("ComboBox");
+        miAreaDeTexto = new JMenuItem("Area de Texto");
         
         mnArquivo.add(miSair);
         mnExemplos.add(miBotao);
@@ -49,6 +53,9 @@ public class GuiMenuPrincipal extends JFrame {
         mnExemplos.add(miRadio);
         mnExemplos.add(miLabel);
         mnExemplos.add(miLista);
+        mnExemplos.add(miListaComFotos);
+        mnExemplos.add(miCombo);
+        mnExemplos.add(miAreaDeTexto);
         
         mnBarra.add(mnArquivo);
         mnBarra.add(mnExemplos);
@@ -103,6 +110,33 @@ public class GuiMenuPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 GuiLista panel = new GuiLista();
+                contentPane.removeAll();
+                contentPane.add(panel);
+                contentPane.validate();
+            }
+        });
+        miListaComFotos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GuiListaComFotos panel = new GuiListaComFotos();
+                contentPane.removeAll();
+                contentPane.add(panel);
+                contentPane.validate();
+            }
+        });
+        miCombo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GuiCombo panel = new GuiCombo();
+                contentPane.removeAll();
+                contentPane.add(panel);
+                contentPane.validate();
+            }
+        });
+        miAreaDeTexto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GuiAreaDeTexto panel = new GuiAreaDeTexto();
                 contentPane.removeAll();
                 contentPane.add(panel);
                 contentPane.validate();
