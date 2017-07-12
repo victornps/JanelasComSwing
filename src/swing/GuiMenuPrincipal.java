@@ -18,7 +18,8 @@ public class GuiMenuPrincipal extends JFrame {
     private JMenu mnArquivo, mnExemplos;
     private JMenuItem miSair, miBotao, miCaixaOpcao, miRadio;
     private JMenuItem miLabel, miLista, miListaComFotos, miCombo;
-    private JMenuItem miAreaDeTexto;
+    private JMenuItem miAreaDeTexto; 
+    private JMenuItem miDialogoMensagem, miDialogoConfirmacao, miDialogoOpcao;
     
     public GuiMenuPrincipal() {
         inicializarComponentes();
@@ -46,6 +47,9 @@ public class GuiMenuPrincipal extends JFrame {
         miListaComFotos = new JMenuItem("Lista com Fotos");
         miCombo = new JMenuItem("ComboBox");
         miAreaDeTexto = new JMenuItem("Area de Texto");
+        miDialogoMensagem = new JMenuItem("Dialogo Mensagem");
+        miDialogoConfirmacao = new JMenuItem("Dialogo Confirmação");
+        miDialogoOpcao = new JMenuItem("Dialogo Opção");
         
         mnArquivo.add(miSair);
         mnExemplos.add(miBotao);
@@ -56,6 +60,9 @@ public class GuiMenuPrincipal extends JFrame {
         mnExemplos.add(miListaComFotos);
         mnExemplos.add(miCombo);
         mnExemplos.add(miAreaDeTexto);
+        mnExemplos.add(miDialogoMensagem);
+        mnExemplos.add(miDialogoConfirmacao);
+        mnExemplos.add(miDialogoOpcao);
         
         mnBarra.add(mnArquivo);
         mnBarra.add(mnExemplos);
@@ -137,6 +144,33 @@ public class GuiMenuPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 GuiAreaDeTexto panel = new GuiAreaDeTexto();
+                contentPane.removeAll();
+                contentPane.add(panel);
+                contentPane.validate();
+            }
+        });
+        miDialogoMensagem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GuiDialogoMensagem panel = new GuiDialogoMensagem();
+                contentPane.removeAll();
+                contentPane.add(panel);
+                contentPane.validate();
+            }
+        });
+        miDialogoConfirmacao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GuiDialogoConfirmacao panel = new GuiDialogoConfirmacao();
+                contentPane.removeAll();
+                contentPane.add(panel);
+                contentPane.validate();
+            }
+        });
+        miDialogoOpcao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GuiDialogoOpcao panel = new GuiDialogoOpcao();
                 contentPane.removeAll();
                 contentPane.add(panel);
                 contentPane.validate();
