@@ -4,11 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 public class GuiBarraProgresso extends JPanel {
 
+    private JLabel lbProgresso;    
     private JButton btAumentar, btDiminuir;
     private JProgressBar pbInstalar;
     
@@ -19,6 +21,10 @@ public class GuiBarraProgresso extends JPanel {
 
     private void inicializarComponentes() {
         setLayout(null);
+        
+        lbProgresso = new JLabel("Teste");
+        lbProgresso.setBounds(155, 8, 100, 25);
+        add(lbProgresso);
         
         btAumentar = new JButton("Aumentar");
         btAumentar.setBounds(50, 50, 100, 25);
@@ -39,15 +45,17 @@ public class GuiBarraProgresso extends JPanel {
         btAumentar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int valorBarraProgresso = pbInstalar.getValue();
-                pbInstalar.setValue(valorBarraProgresso + 5);
+                int valorBarraProgresso = pbInstalar.getValue() + 5;
+                pbInstalar.setValue(valorBarraProgresso);
+                lbProgresso.setText(String.valueOf(valorBarraProgresso));
             }
         });
         btDiminuir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int valorBarraProgresso = pbInstalar.getValue();
-                pbInstalar.setValue(valorBarraProgresso - 5);
+                int valorBarraProgresso = pbInstalar.getValue() - 5;
+                pbInstalar.setValue(valorBarraProgresso);
+                lbProgresso.setText(String.valueOf(valorBarraProgresso));
             }
         });
     }
