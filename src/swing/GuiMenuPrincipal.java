@@ -18,7 +18,7 @@ public class GuiMenuPrincipal extends JFrame {
     private JMenu mnArquivo, mnExemplos;
     private JMenuItem miSair, miBotao, miCaixaOpcao, miRadio;
     private JMenuItem miLabel, miLista, miListaComFotos, miCombo;
-    private JMenuItem miAreaDeTexto, miBarraProgresso; 
+    private JMenuItem miAreaDeTexto, miBarraProgresso, miAbas; 
     private JMenuItem miDialogoMensagem, miDialogoConfirmacao, miDialogoOpcao;
     
     public GuiMenuPrincipal() {
@@ -51,6 +51,7 @@ public class GuiMenuPrincipal extends JFrame {
         miDialogoConfirmacao = new JMenuItem("Dialogo Confirmação");
         miDialogoOpcao = new JMenuItem("Dialogo Opção");
         miBarraProgresso = new JMenuItem("Barra de Progresso");
+        miAbas = new JMenuItem("Abas");
         
         mnArquivo.add(miSair);
         mnExemplos.add(miBotao);
@@ -65,6 +66,7 @@ public class GuiMenuPrincipal extends JFrame {
         mnExemplos.add(miDialogoConfirmacao);
         mnExemplos.add(miDialogoOpcao);
         mnExemplos.add(miBarraProgresso);
+        mnExemplos.add(miAbas);
         
         mnBarra.add(mnArquivo);
         mnBarra.add(mnExemplos);
@@ -182,6 +184,15 @@ public class GuiMenuPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 GuiBarraProgresso panel = new GuiBarraProgresso();
+                contentPane.removeAll();
+                contentPane.add(panel);
+                contentPane.validate();
+            }
+        });
+        miAbas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GuiAbas panel = new GuiAbas();
                 contentPane.removeAll();
                 contentPane.add(panel);
                 contentPane.validate();
