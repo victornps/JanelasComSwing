@@ -91,12 +91,12 @@ public class GuiPedido extends JPanel {
         pnTabela.setBounds(10, 130, 470, 230);
         pnPrincipal.add(pnTabela);
         
-        DefaultTableModel modeloTabela = new DefaultTableModel(new String[]{"Produto", "Qtd", "Unit", "Total"}, 0) {
+        String[] cabecalhoTabela = {"Produto", "Qtd", "Unit", "Total"};
+        DefaultTableModel modeloTabela;
+        modeloTabela = new DefaultTableModel(cabecalhoTabela, 0) {
+            @Override
             public boolean isCellEditable(int linha, int coluna) {
-                if (coluna == 3) {
-                    return false;
-                }
-                return true;
+                return coluna != 3;
             }
         };
         
@@ -118,6 +118,8 @@ public class GuiPedido extends JPanel {
         
     }
 
-    private void definirEventos() {}
+    private void definirEventos() {
+        
+    }
     
 }
