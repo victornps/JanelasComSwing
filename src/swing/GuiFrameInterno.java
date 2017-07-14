@@ -29,7 +29,7 @@ public class GuiFrameInterno extends JInternalFrame {
         add(lbNome);
         
         btMostrar = new JButton("Mostrar");
-        btMostrar.setBounds(10, 60, 100, 25);
+        btMostrar.setBounds(10, 60, 50, 25);
         add(btMostrar);
     }
     

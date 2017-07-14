@@ -20,6 +20,7 @@ public class GuiMenuPrincipal extends JFrame {
     private JMenuItem miLabel, miLista, miListaComFotos, miCombo;
     private JMenuItem miAreaDeTexto, miBarraProgresso, miAbas; 
     private JMenuItem miDialogoMensagem, miDialogoConfirmacao, miDialogoOpcao;
+    private JMenuItem miFrameInterno, miMascara;
     
     public GuiMenuPrincipal() {
         inicializarComponentes();
@@ -52,6 +53,8 @@ public class GuiMenuPrincipal extends JFrame {
         miDialogoOpcao = new JMenuItem("Dialogo Opção");
         miBarraProgresso = new JMenuItem("Barra de Progresso");
         miAbas = new JMenuItem("Abas");
+        miFrameInterno = new JMenuItem("Janela Interna");
+        miMascara = new JMenuItem("Máscara");
         
         mnArquivo.add(miSair);
         mnExemplos.add(miBotao);
@@ -67,6 +70,8 @@ public class GuiMenuPrincipal extends JFrame {
         mnExemplos.add(miDialogoOpcao);
         mnExemplos.add(miBarraProgresso);
         mnExemplos.add(miAbas);
+        mnExemplos.add(miFrameInterno);
+        mnExemplos.add(miMascara);
         
         mnBarra.add(mnArquivo);
         mnBarra.add(mnExemplos);
@@ -193,6 +198,24 @@ public class GuiMenuPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 GuiAbas panel = new GuiAbas();
+                contentPane.removeAll();
+                contentPane.add(panel);
+                contentPane.validate();
+            }
+        });
+        miFrameInterno.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GuiFrameInterno panel = new GuiFrameInterno();
+                contentPane.removeAll();
+                contentPane.add(panel);
+                contentPane.validate();
+            }
+        });
+        miMascara.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GuiMascara panel = new GuiMascara();
                 contentPane.removeAll();
                 contentPane.add(panel);
                 contentPane.validate();
