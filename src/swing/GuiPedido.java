@@ -1,6 +1,8 @@
 package swing;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -21,7 +23,8 @@ public class GuiPedido extends JPanel {
     private JScrollPane spTabela;
     private JTable tabela;
     private JPanel pnPrincipal, pnTabela;
-    private DecimalFormat df = new DecimalFormat("#,###.00");
+    private DecimalFormat real = new DecimalFormat("#,###.00");
+    private DecimalFormat inteiro = new DecimalFormat("000");
     
     public GuiPedido() {
         inicializarComponentes();
@@ -61,6 +64,7 @@ public class GuiPedido extends JPanel {
         pnPrincipal.add(tfNumero);
         
         tfTotal = new JTextField();
+        tfTotal.setEditable(false);
         tfTotal.setBounds(375, 360, 100, 25);
         pnPrincipal.add(tfTotal);
         
@@ -113,13 +117,51 @@ public class GuiPedido extends JPanel {
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         
         spTabela = new JScrollPane(tabela);
-        
         pnTabela.add(spTabela);
-        
     }
 
     private void definirEventos() {
-        
+        btAdicionar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String produto = tfProduto.getText();
+                String qtd = inteiro.format(Integer.parseInt(tfQuantidade.getText()));
+                String unit = real.format(Float.parseFloat(tfPrecoUnitario.getText()));
+                String total = real.format(Integer.parseInt(qtd) * Float.parseFloat(unit));
+                DefaultTableModel dtm = (DefaultTableModel) tabela.getModel();
+                dtm.addRow(new Object[]{produto, qtd, unit, total});
+                calcularTotal();
+                limpar();
+            }
+        });
+        btRemover.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int[] linhasSelecionadas = tabela.getSelectedRows();
+                DefaultTableModel dtm = (DefaultTableModel) tabela.getModel();
+                for (int i = (linhasSelecionadas.length - 1); i >= 0; i--) {
+                    dtm.removeRow(i);
+                }
+                calcularTotal();
+            }
+        });
+    }
+    
+    private void calcularTotal() {
+        float total = 0;
+        for (int linha = 0; linha < tabela.getRowCount(); linha++) {
+            String valor = String.valueOf(tabela.getValueAt(linha, 3));
+            valor = valor.replace(".", "").replace(",", ".").replace("R$ ", "");
+            total += Float.parseFloat(valor);
+        }
+        tfTotal.setText(String.valueOf(total));
+    }
+    
+    private void limpar() {
+        tfProduto.setText("");
+        tfQuantidade.setText("");
+        tfPrecoUnitario.setText("");
+        tfProduto.requestFocus();
     }
     
 }
