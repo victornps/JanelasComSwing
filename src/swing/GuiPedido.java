@@ -10,8 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import sun.swing.table.DefaultTableCellHeaderRenderer;
 
 public class GuiPedido extends JPanel {
 
@@ -104,7 +107,15 @@ public class GuiPedido extends JPanel {
             }
         };
         
+        DefaultTableCellRenderer esquerda = new DefaultTableCellHeaderRenderer();
+        esquerda.setHorizontalAlignment(SwingConstants.LEFT);
+        DefaultTableCellRenderer direita = new DefaultTableCellHeaderRenderer();
+        esquerda.setHorizontalAlignment(SwingConstants.RIGHT);
+        DefaultTableCellRenderer centro = new DefaultTableCellHeaderRenderer();
+        esquerda.setHorizontalAlignment(SwingConstants.CENTER);
+        
         tabela = new JTable(modeloTabela);
+        
         tabela.getColumnModel().getColumn(0).setPreferredWidth(150);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(50);
         tabela.getColumnModel().getColumn(2).setPreferredWidth(100);
@@ -113,6 +124,10 @@ public class GuiPedido extends JPanel {
         tabela.getColumnModel().getColumn(1).setResizable(false);
         tabela.getColumnModel().getColumn(2).setResizable(false);
         tabela.getColumnModel().getColumn(3).setResizable(false);
+        tabela.getColumnModel().getColumn(0).setCellRenderer(esquerda);
+        tabela.getColumnModel().getColumn(1).setCellRenderer(centro);
+        tabela.getColumnModel().getColumn(2).setCellRenderer(centro);
+        tabela.getColumnModel().getColumn(3).setCellRenderer(direita);
         tabela.getTableHeader().setReorderingAllowed(false);
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         
@@ -125,9 +140,9 @@ public class GuiPedido extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String produto = tfProduto.getText();
-                String qtd = inteiro.format(Integer.parseInt(tfQuantidade.getText()));
-                String unit = real.format(Float.parseFloat(tfPrecoUnitario.getText()));
-                String total = real.format(Integer.parseInt(qtd) * Float.parseFloat(unit));
+                String qtd = tfQuantidade.getText();
+                String unit = tfPrecoUnitario.getText();
+                String total = String.valueOf(real.format(Integer.parseInt(qtd) * Float.parseFloat(unit)));
                 DefaultTableModel dtm = (DefaultTableModel) tabela.getModel();
                 dtm.addRow(new Object[]{produto, qtd, unit, total});
                 calcularTotal();
